@@ -21,6 +21,28 @@ nav img{
 	float:left;
 }
 
+body table{
+	text-align:left;
+	font-family: Roboto;
+	font-style: normal;
+	font-size: 14px;
+	width: 1170px;	
+	margin: 0 auto;	
+	position: relative;
+}
+
+body table th{
+	border-bottom-style: solid;
+	border-bottom-color: #d1d1d1;
+	border-bottom-width: 2px;	
+}
+
+body table td{
+	border-bottom-style: solid;
+	border-bottom-color: #d1d1d1;
+	border-bottom-width: 1px;	
+}
+
 #main-nav{
 	margin: 0 auto;
 	list-style: none;	

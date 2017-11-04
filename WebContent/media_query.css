@@ -1,18 +1,24 @@
 /*>=1200 for desktops*/
 @media screen and (min-width: 1200px) {
 	
-	#overview article{
-		margin: 10px;
+	#overview article{		
 		column-count: 3;
 		column-gap: 2em;
 	}
+		
 	
 }
 
 /*>=768 for tablets*/
 @media screen and (min-width: 768px) and (max-width: 1199px){
 		
-	#overview{
+	#main-nav li {
+	border-bottom-style: solid;
+	border-bottom-color: #d1d1d1;
+	border-bottom-width: 1px;
+	}
+		
+	#overview article{		
 		column-count: 2;
 	}
 	
@@ -21,8 +27,11 @@
 
 /*>=320 for phones*/
 @media screen and (min-width: 320px) and (max-width: 767px){
+	#main-nav{
+		display: none;
+	}
 		
-	#overview{
+	#overview article{		
 		column-count: 1;
 	}
 }

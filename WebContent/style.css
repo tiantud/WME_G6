@@ -121,6 +121,10 @@ body table td{
 	text-decoration: none;
 }
 
-#main-table i:hover{
+*.fa-angle-up:hover{
+	color: #42837b;
+}
+
+*.fa-angle-down:hover{
 	color: #42837b;
 }

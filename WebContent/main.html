@@ -10,6 +10,10 @@
 <!-- Frontawesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+
+<script type="text/javascript" src="script.js"></script>
+
 <body>	
 <nav>	
 	<img id = "logo" src = "../Material/world_data_logo_1.png" 
@@ -41,8 +45,7 @@
 	
 	
 	<div>
-	
-		<table id = "maintable">  
+		<table id = "tbl">  
 			<thead>  
 				<tr>  
 					<th>ID</th>
@@ -50,14 +53,17 @@
 						<i class="fa fa-angle-up" aria-hidden="true"></i>
 						<i class="fa fa-angle-down" aria-hidden="true"></i>
 					</th>
-					<th>birth rate/1000</th>
+					<th>birth rate/1000
+						<i class="fa fa-angle-up" aria-hidden="true"></i>
+						<i class="fa fa-angle-down" aria-hidden="true"></i>
+					</th>
 					<th>cellphones/100</th>
 					<th>children/woman</th>
 					<th>electric usage</th>
 					<th>internet usage</th>			
 				</tr>  
 			</thead> 
-			<tbody>  
+			<tbody id = "tbBody">  
 				<tr>  
 					<td>001</td><td>Brazil</td><td>16.405</td><td>90.01936334</td><td>1.862</td><td>2,201.808724</td><td>39.22</td>    
 				</tr>  

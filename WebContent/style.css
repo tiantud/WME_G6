@@ -120,3 +120,7 @@ body table td{
 #overview a:hover{
 	text-decoration: none;
 }
+
+#main-table i:hover{
+	color: #42837b;
+}

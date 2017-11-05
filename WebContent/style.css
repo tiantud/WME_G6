@@ -28,14 +28,23 @@ body table{
 	width: 100%;
 	margin: 0 auto;	
 	position: relative;
+	border-collapse:collapse;
 }
 
-body table th{
+.headerRow{
 	border-bottom: 2px solid #d1d1d1;
 }
 
-body table td{
-	border-bottom: 1px solid #d1d1d1;	
+.headerRow th{
+	padding:5px 0px 5px 0px;
+}
+
+.bodyRow{
+	border-bottom: 1px solid #e3e3e3;
+}
+
+.bodyRow td{
+	padding:5px 0px 5px 0px;
 }
 
 #logo{

@@ -40,7 +40,7 @@
 		<li><a href="#"><i class="fa fa-list-ul" aria-hidden="true">&nbsp;</i>A3-REST</a></li>
 		<li><a href="#"><i class="fa fa-list-ul" aria-hidden="true">&nbsp;</i>A4-Vis</a></li>		
 	</ul>
-	</ul>
+	
 </nav>
 <div id = "pagewrap">	
 	<br>
@@ -55,24 +55,48 @@
 		</article>
 	</div>
 		<br>
-			
+	<div>
+		<div style = "display:inline"> Show/Hide:</div >
+		<U style = "display:inline" class="showOrHide" onclick="beClicked(this)" > birth rate</U>
+		<div style = "display:inline">|</div>
+		<U style = "display:inline" class="showOrHide" onclick="beClicked(this)"> cellphones</U>
+		<div style = "display:inline">|</div>
+		<U style = "display:inline" class="showOrHide" onclick="beClicked(this)"> children/woman</U>
+		<div style = "display:inline">|</div>
+		<U style = "display:inline" class="showOrHide" onclick="beClicked(this)"> electric usage</U>
+		<div style = "display:inline">|</div>
+		<U style = "display:inline" class="showOrHide" onclick="beClicked(this)"> internet usage</U>
+	</div>	
+		<br>
 	<div>
 		<table id = "tbl">  
-			<thead>  
+			<thead id = "tbHead">  
 				<tr>  
 					<th>ID</th>
-					<th>Country 
+					<th nowrap>Country 
 						<i class="fa fa-angle-up" aria-hidden="true"></i>
 						<i class="fa fa-angle-down" aria-hidden="true"></i>
 					</th>
-					<th>birth rate/1000
+					<th nowrap>birth rate/1000
 						<i class="fa fa-angle-up" aria-hidden="true"></i>
 						<i class="fa fa-angle-down" aria-hidden="true"></i>
 					</th>
-					<th>cellphones/100</th>
-					<th>children/woman</th>
-					<th>electric usage</th>
-					<th>internet usage</th>			
+					<th nowrap>cellphones/100
+						<i class="fa fa-angle-up" aria-hidden="true"></i>
+						<i class="fa fa-angle-down" aria-hidden="true"></i>
+					</th>
+					<th nowrap>children/woman
+						<i class="fa fa-angle-up" aria-hidden="true"></i>
+						<i class="fa fa-angle-down" aria-hidden="true"></i>
+					</th>
+					<th nowrap>electric usage
+						<i class="fa fa-angle-up" aria-hidden="true"></i>
+						<i class="fa fa-angle-down" aria-hidden="true"></i>
+					</th>
+					<th nowrap>internet usage
+						<i class="fa fa-angle-up" aria-hidden="true"></i>
+						<i class="fa fa-angle-down" aria-hidden="true"></i>
+					</th>			
 				</tr>  
 			</thead> 
 			<tbody id = "tbBody">  

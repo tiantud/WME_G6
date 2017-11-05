@@ -153,3 +153,16 @@ li a:hover{
 *.fa-angle-down:hover{
 	color: #42837b;
 }
+
+.originTag{
+	cursor:pointer;   
+}
+
+.grayTag{
+	cursor:pointer;
+	color: gray;
+}
+
+.hidedTd{
+	display:none;
+}

@@ -37,3 +37,39 @@ $( document ).ready(function() {
 	});
 
 });
+
+$(function () {
+    var collection = $(".showOrHide");
+    $.each(collection, function () {
+        $(this).addClass("originTag");
+    });
+});
+
+function beClicked(Button) {
+    var collection = $(".showOrHide");
+	var buttonIndex = ($(Button).index() + 1) / 2 + 1; //Calcu;ate the index in table header. 
+	if($(Button).hasClass("originTag")){
+		$(Button).removeClass();
+		$(Button).addClass("grayTag");
+		showHideSwitch(buttonIndex, "hidedTd");
+	} else {
+		$(Button).removeClass();
+		$(Button).addClass("originTag");
+		showHideSwitch(buttonIndex, "");
+	}
+	document.getElementById("test0").innerHTML= buttonIndex.toString(); //Show result in html.
+	document.getElementById("test1").innerHTML= $("#tbBody").children('tr').eq(1).children('td').eq(2).text(); //Show result in html.
+}
+
+
+function showHideSwitch(index, clName){
+	$("#tbBody").find('tr').each(function(){
+        $(this).children('td').eq(index).removeClass();
+		if(clName != "")
+			$(this).children('td').eq(index).addClass(clName); //If clName not empty, then clName is "hidedTd".
+    });
+	
+	$("#tbHead").children('tr').eq(0).children('th').eq(index).removeClass();
+	if(clName != "")
+			$("#tbHead").children('tr').eq(0).children('th').eq(index).addClass(clName);
+}

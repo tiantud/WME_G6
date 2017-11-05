@@ -14,11 +14,37 @@
 
 <script type="text/javascript" src="script.js"></script>
 
+<script>
+$( document ).ready(function() {
+
+$( ".cross" ).hide();
+$( ".menu" ).hide();
+$( ".hamburger" ).click(function() {
+$( ".menu" ).slideToggle( "slow", function() {
+$( ".hamburger" ).hide();
+$( ".cross" ).show();
+});
+});
+
+$( ".cross" ).click(function() {
+$( ".menu" ).slideToggle( "slow", function() {
+$( ".cross" ).hide();
+$( ".hamburger" ).show();
+});
+});
+
+});
+</script>
+
 <body>	
 <nav>	
 	<img id = "logo" src = "../Material/world_data_logo_1.png" 
 		onmouseover = "this.src = '../Material/world_data_logo_2.png'"
-		onmouseout = "this.src = '../Material/world_data_logo_1.png'"/>		
+		onmouseout = "this.src = '../Material/world_data_logo_1.png'"/>	
+
+	<i class="fa fa-bars" aria-hidden="true" id = "hamburger"></i>
+	<i class="fa fa-times" aria-hidden="true" id = "cross"></i>
+		
 	<ul id="main-nav">
 		<li><a href="#"><i class="fa fa-list-ul" aria-hidden="true">&nbsp;</i>A1-Table</a></li>
 		<li><a href="#"><i class="fa fa-list-ul" aria-hidden="true">&nbsp;</i>A2-Parse</a></li>
@@ -26,6 +52,16 @@
 		<li><a href="#"><i class="fa fa-list-ul" aria-hidden="true">&nbsp;</i>A2-Print</a></li>
 		<li><a href="#"><i class="fa fa-list-ul" aria-hidden="true">&nbsp;</i>A3-REST</a></li>
 		<li><a href="#"><i class="fa fa-list-ul" aria-hidden="true">&nbsp;</i>A4-Vis</a></li>		
+	</ul>
+	
+	<ul id="menu">
+		<li><a href="#"><i class="fa fa-list-ul" aria-hidden="true">&nbsp;</i>A1-Table</a></li>
+		<li><a href="#"><i class="fa fa-list-ul" aria-hidden="true">&nbsp;</i>A2-Parse</a></li>
+		<li><a href="#"><i class="fa fa-list-ul" aria-hidden="true">&nbsp;</i>A2-Save</a></li>
+		<li><a href="#"><i class="fa fa-list-ul" aria-hidden="true">&nbsp;</i>A2-Print</a></li>
+		<li><a href="#"><i class="fa fa-list-ul" aria-hidden="true">&nbsp;</i>A3-REST</a></li>
+		<li><a href="#"><i class="fa fa-list-ul" aria-hidden="true">&nbsp;</i>A4-Vis</a></li>		
+	</ul>
 	</ul>
 </nav>
 <div id = "pagewrap">	
@@ -140,7 +176,8 @@
 			</tbody>  
 		</table> 
 	</div>
-	<footer id = "footer">Team_6: &nbsp;</footer>
+	<br><br>
+	<footer id = "footer">Team_6: &nbsp; Yanchen&nbsp;Zhao,&nbsp;Tian&nbsp;Zhao</footer>
 </div>
 </body>
 

@@ -5,12 +5,19 @@
 		column-count: 3;
 		column-gap: 2em;
 	}
-		
+	
+	#hamburger, #menu, #cross{
+		display: none;
+	}
 	
 }
 
 /*>=768 for tablets*/
 @media screen and (min-width: 768px) and (max-width: 1199px){
+		
+	#hamburger, #menu, #cross{
+		display: none;
+	}	
 		
 	#main-nav li {
 	border-bottom-style: solid;

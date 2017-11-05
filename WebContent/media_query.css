@@ -42,3 +42,14 @@
 		column-count: 1;
 	}
 }
+
+/*<320px*/
+@media screen and (max-width: 320px){
+	#main-nav{
+		display: none;
+	}
+		
+	#overview article{		
+		column-count: 1;
+	}
+}

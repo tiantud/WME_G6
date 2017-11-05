@@ -10,8 +10,16 @@ function comparer(index) {
 	return function(a, b) {
 		var valA = getCellValue(a, index),
 	    	valB = getCellValue(b, index);
-	    return $.isNumeric(valA) && $.isNumeric(valB) ?
+		var result;
+	    result = $.isNumeric(valA) && $.isNumeric(valB) ?
 	      	valA - valB : valA.localeCompare(valB);
+		if(result == 0){
+			var IDA = getCellValue(a, 0);
+			var IDB = getCellValue(b, 0);
+			result = $.isNumeric(IDA) && $.isNumeric(IDB) ?
+				IDA - IDB : IDA.localeCompare(IDB);
+		}
+		return result;
 	};
 }
 

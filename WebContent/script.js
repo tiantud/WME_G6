@@ -57,8 +57,6 @@ function beClicked(Button) {
 		$(Button).addClass("originTag");
 		showHideSwitch(buttonIndex, "");
 	}
-	document.getElementById("test0").innerHTML= buttonIndex.toString(); //Show result in html.
-	document.getElementById("test1").innerHTML= $("#tbBody").children('tr').eq(1).children('td').eq(2).text(); //Show result in html.
 }
 
 

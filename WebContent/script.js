@@ -57,11 +57,11 @@ function beClicked(Button) {
     var collection = $(".showOrHide");
 	var buttonIndex = ($(Button).index() + 1) / 2 + 1; //Calcu;ate the index in table header. 
 	if($(Button).hasClass("originTag")){
-		$(Button).removeClass();
+		$(Button).removeClass("originTag");
 		$(Button).addClass("grayTag");
 		showHideSwitch(buttonIndex, "hidedTd");
 	} else {
-		$(Button).removeClass();
+		$(Button).removeClass("grayTag");
 		$(Button).addClass("originTag");
 		showHideSwitch(buttonIndex, "");
 	}

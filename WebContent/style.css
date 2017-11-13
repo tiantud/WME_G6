@@ -175,3 +175,7 @@ li a:hover{
 .hidedTd{
 	display:none;
 }
+
+.showOrHide{
+	text-decoration:underline;
+}

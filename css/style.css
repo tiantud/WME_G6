@@ -50,6 +50,14 @@ body table{
 #logo{
 	position: absolute;
 	margin-left:10px;
+	background-color: transparent;
+	color: #666;
+	display: block;
+	height: 80px;
+	line-height: 100px;
+	padding: 0 1em;
+	text-decoration: none;
+	transition: 250ms background-color linear;
 }
 
 #main-nav{

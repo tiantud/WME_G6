@@ -8,10 +8,11 @@ class WorldDataParser
     {
         $row = 0;
         $dataInArray;
+        $headInArray;
         if (($handle = fopen($csvPath, "r")) !== FALSE) {
-            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                $dataInArray[$row] = $data;
-                $row ++;
+            $header = fgetcsv($handle);
+            while ($row = fgetcsv($handle)) {
+                $dataInArray[] = array_combine($header, $row);
             }
             fclose($handle);
         }
@@ -32,19 +33,15 @@ class WorldDataParser
         $xml->startDocument('1.0', 'utf-8');
         $xml->startElement('Contries');
         
-        // With this .csv file, length = 26.
+        // With this .csv file, length = 25.
         $inputLength = count($dataInArray);
-        for ($cp = 1; $cp < $inputLength; $cp ++) {
+        for ($cp = 0; $cp < $inputLength; $cp ++) {
             // cp ------ Country Pointer
             $data = $dataInArray[$cp];
             $xml->startElement('Contry');
             $dataLength = count($dataInArray[0]);
             if (is_array($data)) {
-                $keys = $dataInArray[0];
-                for ($vc = 0; $vc < $dataLength; $vc ++) {
-                    // vc ------ Value Pointer
-                    $key = $keys[$vc];
-                    $value = $dataInArray[$cp][$vc];
+                foreach ($data as $key => $value) {
                     $xml->startElement(mySubStr($key));
                     $xml->text(mySubStr($value));
                     $xml->endElement();

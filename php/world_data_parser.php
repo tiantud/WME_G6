@@ -3,7 +3,7 @@
 class WorldDataParser
 {
 
-    // read data from file: $csvPath.
+    // Read data from file: $csvPath.
     function parseCSV($csvPath)
     {
         $row = 0;
@@ -18,21 +18,22 @@ class WorldDataParser
         return $dataInArray;
     }
 
-    // save array as a xml file.
+    // Save array as a xml file.
     function saveXML($dataInArray)
     {
         $xml = new XMLWriter();
-		
-	//XMLWriter on windows 10 can not parse relative path
-	$preUri = dirname(dirname(__FILE__));
-		
+        
+        // XMLWriter on windows 10 can not parse relative path.
+        $preUri = dirname(dirname(__FILE__));
+        
         $xml->openUri($preUri . "/Material/world_data.xml");
         $xml->setIndentString('  ');
         $xml->setIndent(true);
         $xml->startDocument('1.0', 'utf-8');
         $xml->startElement('Contries');
-
-        $inputLength = count($dataInArray); // With this .csv file, length = 26
+        
+        // With this .csv file, length = 26.
+        $inputLength = count($dataInArray);
         for ($cp = 1; $cp < $inputLength; $cp ++) {
             // cp ------ Country Pointer
             $data = $dataInArray[$cp];
@@ -46,14 +47,15 @@ class WorldDataParser
                     $value = $dataInArray[$cp][$vc];
                     $xml->startElement(mySubStr($key));
                     $xml->text(mySubStr($value));
-                    $xml->endElement(); 
+                    $xml->endElement();
                 }
             }
-            $xml->endElement(); 
+            $xml->endElement();
         }
-        $xml->endElement(); 
-        $xml->endDocument();
+        $xml->endElement();
+        $result = $xml->endDocument();
         $xml->flush();
+        return $result;
     }
 
     function printXML($csvPath)
@@ -62,6 +64,9 @@ class WorldDataParser
     }
 }
 
+// Get the first word from a sentense.
+// Input: "Just like this."
+// Return: "Just"
 function mySubStr($str)
 {
     $arr = explode(" ", $str);

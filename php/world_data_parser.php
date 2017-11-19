@@ -26,8 +26,8 @@ class WorldDataParser
         
         // XMLWriter on windows 10 can not parse relative path.
         $preUri = dirname(dirname(__FILE__));
-        
         $xml->openUri($preUri . "/Material/world_data.xml");
+        
         $xml->setIndentString('  ');
         $xml->setIndent(true);
         $xml->startDocument('1.0', 'utf-8');
@@ -55,9 +55,18 @@ class WorldDataParser
         return $result;
     }
 
-    function printXML($csvPath)
+    function printXML($xmlPath, $xslPath)
     {
-        // Save for the day after tomorrow...
+        $xmldoc = new DOMDocument();
+        $xmldoc->load($xmlPath);
+        
+        $xsldoc = new DOMDocument();
+        $xsldoc->load($xslPath);
+        
+        $proc = new XSLTProcessor();
+        $proc->registerPHPFunctions();
+        $proc->importStyleSheet($xsldoc);
+        echo $proc->transformToXML($xmldoc);
     }
 }
 

@@ -66,7 +66,18 @@ class WorldDataParser
         $proc = new XSLTProcessor();
         $proc->registerPHPFunctions();
         $proc->importStyleSheet($xsldoc);
+		
+		//Shouldn't be used when the html file is too long.
+		$htmlStr = file_get_contents("index.html");
+		$tableStartPos = strpos($htmlStr, '<table id = "tbl">');
+		$tableEndPos = strpos($htmlStr, '</table>') + 7;
+		
+		$htmlBeforeTable = substr($htmlStr,0,$tableStartPos - 1);
+		$htmlAfterTable = substr($htmlStr,$tableEndPos + 1);
+		
+		echo $htmlBeforeTable;
         echo $proc->transformToXML($xmldoc);
+		echo $htmlAfterTable;
     }
 }
 

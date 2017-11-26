@@ -19,10 +19,29 @@ app.use( express.static( path.join(__dirname, "public") ) );
 /**************************************************************************
 ****************************** csv2json *********************************
 **************************************************************************/
+var fs = require('fs');
+var converter = new Converter({});
+var jsonStruct_countrys = "";
+
+//read from file
+fs.createReadStream('world_data.csv').pipe(converter);
+
+converter.on("end_parsed", function (jsonObj) {
+   jsonStruct_countrys = jsonObj;
+   //console.log(jsonObj); 
+   fs.writeFile('world_data.json', JSON.stringify(jsonObj), 'utf-8');
+});
+
 
 /**************************************************************************
 ********************** handle HTTP METHODS ***********************
 **************************************************************************/
+// GET all properties
+app.get('/properties', function (req, res) {
+    var keys = Object.keys(jsonStruct_countrys[0]);
+    res.send( keys );
+});
+
 
 
 // DO NOT CHANGE!

@@ -75,14 +75,13 @@ app.get('/properties/:num', function (req, res) {
 
 //POST country with given name and two random variables
 app.post('/item', function (req, res){
-	//var keys = Object.keys(jsonStruct_countrys[0]);
-	var t = jsonStruct_countrys.length();
-	
-	jsonStruct_countrys[t++].name = req.params.name;
-	jsonStruct_countrys[t++].birth = req.params.birth;
-	jsonStruct_countrys[t++].cellphone = req.params.cellphone;
-	
-	res.send(Object.keys(jsonStruct_countrys[0]));
+		jsonStruct_countrys.push({
+		"id": (jsonStruct_countrys.length + 1).toString(), 
+		"name": req.params.name, 
+		"birth rate per 1000": (Math.random() * 25).toString(), 
+		"cell phones per 100": (Math.random() * 150).toString()
+	});
+	fs.writeFile('world_data.json', JSON.stringify(jsonStruct_countrys), 'utf-8');
 });
 
 //DELETE last country

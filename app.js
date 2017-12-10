@@ -75,12 +75,13 @@ app.get('/properties/:num', function (req, res) {
 
 //POST country with given name and two random variables
 app.post('/item', function (req, res){
-		jsonStruct_countrys.push({
-		"id": (jsonStruct_countrys.length + 1).toString(), 
-		"name": req.params.name, 
-		"birth rate per 1000": (Math.random() * 25).toString(), 
-		"cell phones per 100": (Math.random() * 150).toString()
-	});
+	var keys = Object.keys(jsonStruct_countrys[0]);
+	var new_country = {};
+	new_country[keys[0]] = (jsonStruct_countrys.length + 1).toString();
+	new_country[keys[1]] = req.params.name;
+	new_country[keys[2]] = (Math.random() * 25).toString();
+	new_country[keys[3]] = (Math.random() * 150).toString();
+	jsonStruct_countrys.push(new_country);
 	fs.writeFile('world_data.json', JSON.stringify(jsonStruct_countrys), 'utf-8');
 });
 

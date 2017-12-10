@@ -43,10 +43,10 @@ app.get('/items', function (req, res) {
 
 // GET selected country with all properties, id is the actual ID of country 
 app.get('/items/:id', function (req, res) {
-	if (req.params.id < jsonStruct_countrys.length())
+	if (parseInt(req.params.id) < jsonStruct_countrys.length() && parseInt(req.params.id) > 0)
 		res.send( jsonStruct_countrys[parseInt(req.params.id) - 1]);
 	else
-		res.status(404).send("No such id " + req.params.id + " in databese.");
+		res.status(400).send("No such id " + req.params.id + " in databese.");
     
 });
 
@@ -54,6 +54,9 @@ app.get('/items/:id', function (req, res) {
 app.get('/items/:id1/:id2', function (req, res) {
 	var id1 = parseInt(req.params.id1) - 1;
 	var id2 = parseInt(req.params.id2) - 1;
+	if (id1<0 || id2<0 || id1>id2 || id1>jsonStruct_countrys.length())
+		res.status(400).send("Range not possible.");
+		
 	var result = new Array();
 	for(var i = id1 ;i <= id2; i++){
 		result.push(jsonStruct_countrys[i]);
@@ -82,6 +85,8 @@ app.post('/item', function (req, res){
 	new_country[keys[2]] = (Math.random() * 25).toString();
 	new_country[keys[3]] = (Math.random() * 150).toString();
 	jsonStruct_countrys.push(new_country);
+	
+	res.status(201).send("Added country "+ req.params.name + " to list！");
 	fs.writeFile('world_data.json', JSON.stringify(jsonStruct_countrys), 'utf-8');
 });
 
@@ -90,6 +95,7 @@ app.delete('/items', function (req, res) {
 	var index_last = jsonStruct_countrys.length - 1;
     if (index_last > -1) {
 		jsonStruct_countrys.splice(index_last, 1);
+		res.status(201).send("Deleted last country "+ jsonStruct_countrys.length - 1);
 	}
 	fs.writeFile('world_data.json', JSON.stringify(jsonStruct_countrys), 'utf-8');
 });
@@ -98,6 +104,7 @@ app.delete('/items', function (req, res) {
 app.delete('/items/:id', function (req, res) {
 	var index = req.params.id - 1;
 	jsonStruct_countrys.splice(index, 1);
+	res.status(201).send("Item "+ req.params.name + " deleted successfully.");
 	fs.writeFile('world_data.json', JSON.stringify(jsonStruct_countrys), 'utf-8');
 });
 

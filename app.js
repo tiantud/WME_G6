@@ -1,3 +1,6 @@
+document.write("<script language='javascript' src='assets/js/jquery-3.1.1.js'></script>");
+document.write("<script language='javascript' src='assets/js/ajax.js'></script>");
+
 // DO NOT CHANGE!
 //init app with express, util, body-parser, csv2json
 var express = require('express');
@@ -50,7 +53,7 @@ app.get('/items/:id', function (req, res) {
 app.get('/items/:id1/:id2', function (req, res) {
 	var id1 = parseInt(req.params.id1) - 1;
 	var id2 = parseInt(req.params.id2) - 1;
-	var result=new Array();
+	var result = new Array();
 	for(var i = id1 ;i <= id2; i++){
 		result.push(jsonStruct_countrys[i]);
 	}

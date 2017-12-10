@@ -42,26 +42,29 @@ app.get('/items', function (req, res) {
 });
 
 // GET selected country with all properties, id is the actual ID of country 
-app.get('/items/:id', function (req, res) {
-	if (parseInt(req.params.id) < jsonStruct_countrys.length() && parseInt(req.params.id) > 0)
-		res.send( jsonStruct_countrys[parseInt(req.params.id) - 1]);
+app.get('/items/:actralId', function (req, res) {
+	var indexId = actralToIndex(req.params.actralId);
+	if (idIsValid(indexId, jsonStruct_countrys))
+		res.send( jsonStruct_countrys[indexId]);
 	else
-		res.status(400).send("No such id " + req.params.id + " in databese.");
+		res.status(400).send("No such id {" + req.params.actralId + "} in databese.");
     
 });
 
-// GET all countries between id1 and id2, id1 and id2 are actral ID
-app.get('/items/:id1/:id2', function (req, res) {
-	var id1 = parseInt(req.params.id1) - 1;
-	var id2 = parseInt(req.params.id2) - 1;
-	if (id1<0 || id2<0 || id1>id2 || id1>jsonStruct_countrys.length())
+// GET all countries between actralId1 and actralId1, which are actral ID
+// actralId is the actual ID of country, indexID is the index in jsonStruct_countrys
+app.get('/items/:actralId1/:actralId2', function (req, res) {
+	var indexId1 = actralToIndex(req.params.actralId1);
+	var indexId2 = actralToIndex(req.params.actralId2);
+	if (idIsValid(indexId1, jsonStruct_countrys) && idIsValid(indexId2, jsonStruct_countrys) && indexId1<=indexId2){
+		var result = new Array();
+		for(var i = id1 ;i <= id2; i++){
+			result.push(jsonStruct_countrys[i]);
+		}
+		res.send( result );
+	} else {
 		res.status(400).send("Range not possible.");
-		
-	var result = new Array();
-	for(var i = id1 ;i <= id2; i++){
-		result.push(jsonStruct_countrys[i]);
 	}
-    res.send( result );
 });
 
 // GET all properties
@@ -108,6 +111,18 @@ app.delete('/items/:id', function (req, res) {
 	//res.status(400).send("No such id "+ req.params.name +" in database");
 	fs.writeFile('world_data.json', JSON.stringify(jsonStruct_countrys), 'utf-8');
 });
+
+function actralToIndex(actralId){
+	return actralId - 1;
+}
+
+function idIsValid(indexId, jsonStruct_countrys){
+	if(indexId > -1 && indexId < jsonStruct_countrys.length){
+		return true;
+	} else {
+		return false;
+	}
+}
 
 // DO NOT CHANGE!
 // bind server to port

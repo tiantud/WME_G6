@@ -1,6 +1,3 @@
-document.write("<script language='javascript' src='assets/js/jquery-3.1.1.js'></script>");
-document.write("<script language='javascript' src='assets/js/ajax.js'></script>");
-
 // DO NOT CHANGE!
 //init app with express, util, body-parser, csv2json
 var express = require('express');
@@ -20,7 +17,7 @@ app.use( express.static( path.join(__dirname, "public") ) );
 
 
 /**************************************************************************
-****************************** csv2json *********************************
+******************************* csv2json **********************************
 **************************************************************************/
 var fs = require('fs');
 var converter = new Converter({});
@@ -37,7 +34,7 @@ converter.on("end_parsed", function (jsonObj) {
 
 
 /**************************************************************************
-********************** handle HTTP METHODS ***********************
+**************************** handle HTTP METHODS **************************
 **************************************************************************/
 // GET all countries with all properties
 app.get('/items', function (req, res) {
@@ -71,15 +68,38 @@ app.get('/properties/:num', function (req, res) {
     res.send( keys[req.params.num] );
 });
 
-//POST country
 /*
+//POST country with given name and two random variables
 app.post('/items', function (req, res) {
-	var newCountry = new Array();
+	var newCountry = new Map(jsonStruct_countrys[0]);
+	var keys = Object.keys(jsonStruct_countrys[0]);
+	for (var prop in keys){
+		newCountry[prop] = 0;
+	}
+	newCountry[keys[0]] = jsonStruct_countrys.length + 1;
+	newCountry[keys[1]] = req.params.name;
+	newCountry[keys[2]] = Math.random() * 25;
+	newCountry[keys[3]] = Math.random() * 150;
     jsonStruct_countrys.push(newCountry);
 	fs.writeFile('world_data.json', JSON.stringify(jsonStruct_countrys), 'utf-8');
 });
 */
 
+//DELETE last country
+app.delete('/items', function (req, res) {
+	var index_last = jsonStruct_countrys.length - 1;
+    if (index_last > -1) {
+		jsonStruct_countrys.splice(index_last, 1);
+	}
+	fs.writeFile('world_data.json', JSON.stringify(jsonStruct_countrys), 'utf-8');
+});
+
+//DELETE selected country
+app.delete('/items/:id', function (req, res) {
+	var index = req.params.id - 1;
+	jsonStruct_countrys.splice(index, 1);
+	fs.writeFile('world_data.json', JSON.stringify(jsonStruct_countrys), 'utf-8');
+});
 
 // DO NOT CHANGE!
 // bind server to port

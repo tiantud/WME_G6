@@ -44,7 +44,7 @@ app.get('/items', function (req, res) {
 // GET selected country with all properties, id is the actual ID of country 
 app.get('/items/:actralId', function (req, res) {
 	var indexId = actralToIndex(req.params.actralId);
-	if (idIsValid(indexId, jsonStruct_countrys))
+	if (idIsValid(indexId))
 		res.send( jsonStruct_countrys[indexId]);
 	else
 		res.status(400).send("No such id {" + req.params.actralId + "} in databese.");
@@ -56,7 +56,7 @@ app.get('/items/:actralId', function (req, res) {
 app.get('/items/:actralId1/:actralId2', function (req, res) {
 	var indexId1 = actralToIndex(req.params.actralId1);
 	var indexId2 = actralToIndex(req.params.actralId2);
-	if (idIsValid(indexId1, jsonStruct_countrys) && idIsValid(indexId2, jsonStruct_countrys) && indexId1<=indexId2){
+	if (idIsValid(indexId1) && idIsValid(indexId2) && indexId1<=indexId2){
 		var result = new Array();
 		for(var i = id1 ;i <= id2; i++){
 			result.push(jsonStruct_countrys[i]);
@@ -74,8 +74,12 @@ app.get('/properties', function (req, res) {
 
 //GET selected propertiy
 app.get('/properties/:num', function (req, res) {
-    var keys = Object.keys(jsonStruct_countrys[0]);
-    res.send( keys[req.params.num] );
+	var keys = Object.keys(jsonStruct_countrys[0]);
+	
+	if (parseInt(num) <= jsonStruct_countrys.length() || parseInt(num) > 0)    
+		res.send( keys[req.params.num] );
+	else
+		res.status(400).send("wrong input.");
 });
 
 
@@ -85,7 +89,7 @@ app.post('/item', function (req, res){
 	var new_country = {};
 	new_country[keys[0]] = (jsonStruct_countrys.length + 1).toString();
 	new_country[keys[1]] = req.params.name;
-	new_country[keys[2]] = (Math.random() * 25).toString();
+	new_country[keys[2]] = (Math.random() * 25).toString();         //"beliebigen Properties"?
 	new_country[keys[3]] = (Math.random() * 150).toString();
 	jsonStruct_countrys.push(new_country);
 	
@@ -100,15 +104,19 @@ app.delete('/items', function (req, res) {
 		jsonStruct_countrys.splice(index_last, 1);
 		res.status(204).send("Deleted last country "+ jsonStruct_countrys.length - 1);
 	}
+	res.status(400);
 	fs.writeFile('world_data.json', JSON.stringify(jsonStruct_countrys), 'utf-8');
 });
 
 //DELETE selected country
 app.delete('/items/:id', function (req, res) {
 	var index = req.params.id - 1;
-	jsonStruct_countrys.splice(index, 1);
-	res.status(204).send("Item "+ req.params.name + " deleted successfully.");
-	//res.status(400).send("No such id "+ req.params.name +" in database");
+	if (idIsValid(req.params.id)){
+		jsonStruct_countrys.splice(index, 1);
+		res.status(204).send("Item "+ req.params.name + " deleted successfully.");
+	}
+	else
+		res.status(400).send("No such id "+ req.params.name +" in database");
 	fs.writeFile('world_data.json', JSON.stringify(jsonStruct_countrys), 'utf-8');
 });
 
@@ -116,7 +124,7 @@ function actralToIndex(actralId){
 	return actralId - 1;
 }
 
-function idIsValid(indexId, jsonStruct_countrys){
+function idIsValid(indexId){
 	if(indexId > -1 && indexId < jsonStruct_countrys.length){
 		return true;
 	} else {

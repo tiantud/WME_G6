@@ -36,12 +36,46 @@ converter.on("end_parsed", function (jsonObj) {
 /**************************************************************************
 ********************** handle HTTP METHODS ***********************
 **************************************************************************/
-// GET all properties
-app.get('/properties', function (req, res) {
-    var keys = Object.keys(jsonStruct_countrys[0]);
-    res.send( keys );
+// GET all countries with all properties
+app.get('/items', function (req, res) {
+    res.send( jsonStruct_countrys );
 });
 
+// GET selected country with all properties, id is the actual ID of country 
+app.get('/items/:id', function (req, res) {
+    res.send( jsonStruct_countrys[parseInt(req.params.id) - 1]);
+});
+
+// GET all countries between id1 and id2, id1 and id2 are actral ID
+app.get('/items/:id1/:id2', function (req, res) {
+	var id1 = parseInt(req.params.id1) - 1;
+	var id2 = parseInt(req.params.id2) - 1;
+	var result=new Array();
+	for(var i = id1 ;i <= id2; i++){
+		result.push(jsonStruct_countrys[i]);
+	}
+    res.send( result );
+});
+
+// GET all properties
+app.get('/properties', function (req, res) {
+    res.send( Object.keys(jsonStruct_countrys[0]) );
+});
+
+//GET selected propertiy
+app.get('/properties/:num', function (req, res) {
+    var keys = Object.keys(jsonStruct_countrys[0]);
+    res.send( keys[req.params.num] );
+});
+
+//POST country
+/*
+app.post('/items', function (req, res) {
+	var newCountry = new Array();
+    jsonStruct_countrys.push(newCountry);
+	fs.writeFile('world_data.json', JSON.stringify(jsonStruct_countrys), 'utf-8');
+});
+*/
 
 
 // DO NOT CHANGE!

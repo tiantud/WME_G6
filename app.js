@@ -43,7 +43,11 @@ app.get('/items', function (req, res) {
 
 // GET selected country with all properties, id is the actual ID of country 
 app.get('/items/:id', function (req, res) {
-    res.send( jsonStruct_countrys[parseInt(req.params.id) - 1]);
+	if (req.params.id < jsonStruct_countrys.length())
+		res.send( jsonStruct_countrys[parseInt(req.params.id) - 1]);
+	else
+		res.status(404).send("No such id " + req.params.id + " in databese.");
+    
 });
 
 // GET all countries between id1 and id2, id1 and id2 are actral ID
@@ -68,22 +72,18 @@ app.get('/properties/:num', function (req, res) {
     res.send( keys[req.params.num] );
 });
 
-/*
+
 //POST country with given name and two random variables
-app.post('/items', function (req, res) {
-	var newCountry = new Map(jsonStruct_countrys[0]);
-	var keys = Object.keys(jsonStruct_countrys[0]);
-	for (var prop in keys){
-		newCountry[prop] = 0;
-	}
-	newCountry[keys[0]] = jsonStruct_countrys.length + 1;
-	newCountry[keys[1]] = req.params.name;
-	newCountry[keys[2]] = Math.random() * 25;
-	newCountry[keys[3]] = Math.random() * 150;
-    jsonStruct_countrys.push(newCountry);
-	fs.writeFile('world_data.json', JSON.stringify(jsonStruct_countrys), 'utf-8');
+app.post('/item', function (req, res){
+	//var keys = Object.keys(jsonStruct_countrys[0]);
+	var t = jsonStruct_countrys.length();
+	
+	jsonStruct_countrys[t++].name = req.params.name;
+	jsonStruct_countrys[t++].birth = req.params.birth;
+	jsonStruct_countrys[t++].cellphone = req.params.cellphone;
+	
+	res.send(Object.keys(jsonStruct_countrys[0]));
 });
-*/
 
 //DELETE last country
 app.delete('/items', function (req, res) {

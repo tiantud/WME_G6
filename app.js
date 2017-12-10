@@ -95,7 +95,7 @@ app.delete('/items', function (req, res) {
 	var index_last = jsonStruct_countrys.length - 1;
     if (index_last > -1) {
 		jsonStruct_countrys.splice(index_last, 1);
-		res.status(201).send("Deleted last country "+ jsonStruct_countrys.length - 1);
+		res.status(204).send("Deleted last country "+ jsonStruct_countrys.length - 1);
 	}
 	fs.writeFile('world_data.json', JSON.stringify(jsonStruct_countrys), 'utf-8');
 });
@@ -104,7 +104,8 @@ app.delete('/items', function (req, res) {
 app.delete('/items/:id', function (req, res) {
 	var index = req.params.id - 1;
 	jsonStruct_countrys.splice(index, 1);
-	res.status(201).send("Item "+ req.params.name + " deleted successfully.");
+	res.status(204).send("Item "+ req.params.name + " deleted successfully.");
+	//res.status(400).send("No such id "+ req.params.name +" in database");
 	fs.writeFile('world_data.json', JSON.stringify(jsonStruct_countrys), 'utf-8');
 });
 
